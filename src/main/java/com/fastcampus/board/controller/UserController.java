@@ -1,5 +1,6 @@
 package com.fastcampus.board.controller;
 
+import com.fastcampus.board.aop.LoginCheck;
 import com.fastcampus.board.dto.UserDTO;
 import com.fastcampus.board.dto.request.UserDeleteId;
 import com.fastcampus.board.dto.request.UserLoginRequest;
@@ -79,6 +80,7 @@ public class UserController {
     }
 
     @PatchMapping("password")
+    @LoginCheck(type= LoginCheck.UserType.USER)
     public ResponseEntity<LoginResponse> updateUserPassword(@RequestBody UserUpdatePasswordRequest userUpdatePasswordRequest, HttpSession session){
 
         ResponseEntity<LoginResponse> responseEntity = null;
