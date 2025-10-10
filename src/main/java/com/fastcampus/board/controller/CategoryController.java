@@ -2,6 +2,7 @@ package com.fastcampus.board.controller;
 
 import com.fastcampus.board.aop.LoginCheck;
 import com.fastcampus.board.dto.CategoryDTO;
+import com.fastcampus.board.dto.request.CategoryRequest;
 import com.fastcampus.board.service.impl.CategoryServiceImpl;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -27,8 +28,15 @@ public class CategoryController {
 
     @PatchMapping("{categoryId}")
     @LoginCheck(type= LoginCheck.UserType.ADMIN)
-    public void updateCategory(String accountId, @PathVariable(name="categoryId") int categoryId, @RequestBody CategoryDTO category){
+    public void updateCategories(String accountId, @PathVariable(name="categoryId") int categoryId, @RequestBody CategoryRequest categoryRequest){
+        CategoryDTO categoryDTO = new CategoryDTO(categoryId, categoryRequest.getName(),CategoryDTO.SortStatus.NEWEST,10,10);
+        categoryServiceImpl.update(categoryDTO);
+    }
 
+    @DeleteMapping("{categoryId}")
+    @LoginCheck(type= LoginCheck.UserType.ADMIN)
+    public void deleteCategories(String accountId, @PathVariable(name="categoryId") int categoryId){
+        categoryServiceImpl.delete(categoryId);
     }
 
 }
