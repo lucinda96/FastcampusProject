@@ -11,4 +11,5 @@ public interface PostSearchMapper {
 
     public List<PostDTO> getPosts(PostSearchRequest postSearchRequest);
 
+    List<PostDTO> getPostByTag(String tagName);
 }

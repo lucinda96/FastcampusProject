@@ -6,6 +6,9 @@
     <insert id="register" parameterType="com.fastcampus.board.dto.PostDTO">
         INSERT INTO post (name,isAdmin,contents,createTime,views,categoryId,userId,fileId,updateTime)
         VALUES(#{name},#{isAdmin},#{contents},#{createTime},#{views},#{categoryId},#{userId},#{fileId},#{updateTime})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <select id ="selectMyPosts" resultType="com.fastcampus.board.dto.PostDTO">
