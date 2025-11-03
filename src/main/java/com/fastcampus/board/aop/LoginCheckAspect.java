@@ -37,7 +37,7 @@ public class LoginCheckAspect {
         }
 
         if(id==null){
-            log.error(joinPoint.toString()+"accuntName : " + id);
+            log.info(joinPoint.toString()+"accountName : " + id);
             throw new HttpStatusCodeException(HttpStatus.FORBIDDEN,"로그인한 ID 값을 확인해주세요."){};
         }
 
